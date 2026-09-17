@@ -25,8 +25,9 @@ python3 -m http.server
 ## Replacing placeholder images
 
 Every placeholder is an SVG in `images/` whose caption says what photo belongs
-there. Drop a JPG/PNG with the same name into `images/` and update the `.svg`
-reference in the page (or in `tools/build_site.py` and rebuild).
+there. Drop a JPG, PNG, or WebP with the **same name** into `images/` (for example
+`images/home-hero.jpg`) and run `python3 tools/build_site.py`. The build picks up the
+photo automatically, removes the placeholder caption, and deletes the unused SVG.
 
 ## External systems
 

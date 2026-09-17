@@ -113,6 +113,7 @@ mark.ph{background:rgba(193,123,94,.14);color:var(--terracotta-deep);font-family
 .ph-img{margin:0;position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:var(--radius);background:var(--linen-deep)}
 .ph-img img{width:100%;height:100%;object-fit:cover}
 .ph-img figcaption{position:absolute;left:0;right:0;bottom:0;padding:.55rem .9rem;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--terracotta-deep);background:rgba(250,247,243,.88)}
+.ph-img--real{background:var(--linen)}
 .ph-img--wide{aspect-ratio:16/10}
 .ph-img--square{aspect-ratio:1}
 .ph-img--tall{aspect-ratio:3/4}

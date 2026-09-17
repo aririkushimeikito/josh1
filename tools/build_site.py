@@ -30,8 +30,19 @@ def href(slug):
         return ("index.html" if slug == "" else f"{slug}.html") + frag
     return (PREFIX if slug == "" else f"{PREFIX}{slug}/") + frag if (PREFIX or slug) else "./" + frag
 
+IMAGES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "images")
+REAL_EXTS = (".jpg", ".jpeg", ".png", ".webp")
+
+def real_image(name):
+    """Return the filename of a supplied photo for this placeholder name, if one exists."""
+    for ext in REAL_EXTS:
+        if os.path.isfile(os.path.join(IMAGES_DIR, name + ext)):
+            return name + ext
+    return None
+
 def img(name):
-    return f"images/{name}.svg" if FLAT else f"{PREFIX}images/{name}.svg"
+    fn = real_image(name) or f"{name}.svg"
+    return f"images/{fn}" if FLAT else f"{PREFIX}images/{fn}"
 
 def esc(s):
     return html.escape(s, quote=True)
@@ -61,7 +72,10 @@ def shop_btn(label="Shop Skincare", style="secondary"):
 def eyebrow(t):
     return f'<p class="eyebrow">{rich(t)}</p>' if t else ""
 
-def figure(name, alt, cls=""):
+def figure(name, alt, cls="", focus=None):
+    style = f' style="object-position:{focus}"' if focus else ""
+    if real_image(name):
+        return f'<figure class="ph-img ph-img--real {cls}"><img src="{img(name)}" alt="{esc(alt)}" loading="lazy"{style}></figure>'
     return (f'<figure class="ph-img {cls}"><img src="{img(name)}" alt="{esc(alt)}" loading="lazy" width="1200" height="1500">'
             f'<figcaption>[IMAGE TO BE PROVIDED] {esc(alt)}</figcaption></figure>')
 
@@ -70,7 +84,7 @@ def section(inner, theme="cream", cls="", id_=None):
     i = f' id="{id_}"' if id_ else ""
     return f'<section class="sec sec--{theme} {cls}"{i}><div class="wrap">{inner}</div></section>'
 
-def hero(eyebrow_t, h1, paras, ctas, image, alt, tagline=None):
+def hero(eyebrow_t, h1, paras, ctas, image, alt, tagline=None, focus=None):
     tag = f'<p class="hero__tagline">{rich(tagline)}</p>' if tagline else ""
     # One sentence per line: break the headline after each period.
     parts = re.split(r"(?<=\.)\s+", h1.strip())
@@ -89,7 +103,7 @@ def hero(eyebrow_t, h1, paras, ctas, image, alt, tagline=None):
       <div class="hero__copy">{p(paras)}</div>
       <div class="cta-row">{"".join(ctas)}</div>
     </div>
-    <div class="hero__media">{figure(image, alt)}</div>
+    <div class="hero__media">{figure(image, alt, focus=focus).replace('loading="lazy"', 'loading="eager" fetchpriority="high"')}</div>
   </div>
 </section>'''
 
@@ -376,6 +390,7 @@ mark.ph{background:rgba(193,123,94,.14);color:var(--terracotta-deep);font-family
 .ph-img{margin:0;position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:var(--radius);background:var(--linen-deep)}
 .ph-img img{width:100%;height:100%;object-fit:cover}
 .ph-img figcaption{position:absolute;left:0;right:0;bottom:0;padding:.55rem .9rem;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--terracotta-deep);background:rgba(250,247,243,.88)}
+.ph-img--real{background:var(--linen)}
 .ph-img--wide{aspect-ratio:16/10}
 .ph-img--square{aspect-ratio:1}
 .ph-img--tall{aspect-ratio:3/4}
@@ -586,7 +601,7 @@ def page_home():
               C.PAGES["index"]["h1"],
               ["Isabelle Joseph, DNP, NP-BC provides personalized aesthetic, wellness, and skincare care designed around your goals—and your schedule. Experience expert care in the comfort and convenience of your home or preferred location."],
               [book_btn(), btn("Explore Services", "services", "secondary")],
-              "home-hero", "Professional portrait of Isabelle Joseph, DNP, NP-BC")
+              "home-hero", "Isabelle Joseph, DNP, NP-BC assessing a patient's face before an injectable treatment", focus="50% 35%")
     placeholder_svg("home-hero", "Hero portrait of Isabelle — warm, natural light", tone="linen")
     b += '<div class="wrap"><ul class="trust"><li>Doctorally Prepared</li><li>Personalized Care</li><li>Concierge Convenience</li></ul></div>'
     b += split("Meet Isabelle", "Clinical Expertise Meets Thoughtful, Personalized Care", [
@@ -1027,6 +1042,12 @@ def clean():
         return
     for name in GENERATED + list(C.PAGES[k]["slug"] for k in C.PAGES if C.PAGES[k]["slug"]) + C.SERVICE_ORDER:
         path = os.path.join(OUT, name)
+        if name == "images":
+            if os.path.isdir(path):
+                for f in os.listdir(path):
+                    if f.endswith(".svg"):
+                        os.remove(os.path.join(path, f))
+            continue
         if os.path.isdir(path):
             shutil.rmtree(path)
         elif os.path.isfile(path):
@@ -1063,7 +1084,8 @@ def main():
             f'  <url><loc>{C.SITE_URL}/{(s + "/") if s else ""}</loc><lastmod>{today}</lastmod><priority>{"1.0" if s == "" else ("0.9" if s in C.SERVICES else "0.8")}</priority></url>\n' for s in urls) + "</urlset>\n"
         write(os.path.join(OUT, "sitemap.xml"), sm)
     for name, svg in PLACEHOLDERS.items():
-        write(os.path.join(OUT, "images", f"{name}.svg"), svg)
+        if not real_image(name):
+            write(os.path.join(OUT, "images", f"{name}.svg"), svg)
     print(f"Built {len(builders)+1} pages and {len(PLACEHOLDERS)} placeholder images -> {OUT}")
 
 if __name__ == "__main__":
