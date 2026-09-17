@@ -123,7 +123,7 @@ Both fonts are in Squarespace's Google Fonts list. Mobile: H1 38–42px, H2 30px
 - Site title: "Isabelle Joseph, DNP" (text logo) + optional tagline "Concierge Aesthetics • Wellness • Skincare" (add tagline in Site Title settings; hide on mobile).
 - Nav items: Home · About · Services ▾ · Skincare · The Isabelle Edit · (FAQs in footer only).
 - Header button: **Book** → Skin Clique booking URL, Primary style at full size (Terracotta fill, white uppercase text, 16px × 28px padding, 2px radius).
-- Mobile menu: native overlay, DM Serif Display 24px items, Cream background.
+- Mobile menu (≤1100px, so tablets too): native overlay, DM Sans uppercase items, Cream background, Book button full width. Hide the site tagline on phones.
 
 ### Footer (Design → Footer, one Fluid Engine section, Warm Linen)
 
@@ -268,7 +268,7 @@ Fluid Engine settings: desktop grid 24 columns; enable "Fill Screen" off; sectio
 
 **Desktop (≥1180px):** asymmetric 7/5 and 5/6 splits, hero image offset 2 grid rows down for editorial tension, sticky FAQ title, 3-column lists.
 
-**Tablet (700–960px):** Fluid Engine desktop layout scales; reduce H1 to 44px; 3-column lists become 2 (Squarespace does this at the mobile breakpoint, so on tablet keep 3 columns but reduce type); nav collapses to mobile menu ≤ 960px.
+**Tablet (641–1100px):** hamburger navigation; 3-column lists step down to 2 columns (feature lists, journal, testimonials); splits stack image-first below 860px; H1 44–56px.
 
 **Mobile (≤ 640px) — arrange separately in Fluid Engine's mobile editor:**
 - Every split: image first (crop 4:3), then eyebrow/heading/copy/buttons; buttons full-width, 48px tall.
