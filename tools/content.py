@@ -908,6 +908,7 @@ FAQ_EXTRA = {
 PHOTOS = {
     # Home
     "home-hero":        ("home-hero.jpg", "50% 35%", "Isabelle Joseph, DNP, NP-BC assessing a patient's face before an injectable treatment"),
+    "home-meet":        ("tox-approach.jpg", "50% 30%", "Isabelle Joseph, DNP, NP-BC smiling while preparing a treatment"),
     "home-concierge":   ("concierge-kit.jpg", "50% 60%", "Isabelle's concierge kit packed with skincare, ready for a home visit"),
     "home-skincare":    ("home-skincare.jpg", "50% 50%", "Medical-grade skincare products laid out with Isabelle's concierge bag"),
     # About
