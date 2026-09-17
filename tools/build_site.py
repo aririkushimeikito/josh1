@@ -18,16 +18,20 @@ OUT = sys.argv[sys.argv.index("--flat") + 1] if FLAT else os.path.join(os.path.d
 OUT = os.path.abspath(OUT)
 
 # ------------------------------------------------------------------ helpers
+PREFIX = ""  # relative path back to the site root for the page being rendered
+
 def href(slug):
-    """Internal link. slug '' = home."""
+    """Internal link. slug '' = home. Links are relative so the site works at a domain root or a subpath."""
     if slug.startswith("http"):
         return slug
+    slug, _, frag = slug.partition("#")
+    frag = f"#{frag}" if frag else ""
     if FLAT:
-        return "index.html" if slug == "" else f"{slug}.html"
-    return "/" if slug == "" else f"/{slug}/"
+        return ("index.html" if slug == "" else f"{slug}.html") + frag
+    return (PREFIX if slug == "" else f"{PREFIX}{slug}/") + frag if (PREFIX or slug) else "./" + frag
 
 def img(name):
-    return f"images/{name}.svg" if FLAT else f"/images/{name}.svg"
+    return f"images/{name}.svg" if FLAT else f"{PREFIX}images/{name}.svg"
 
 def esc(s):
     return html.escape(s, quote=True)
@@ -178,7 +182,7 @@ def service_groups(theme="cream", eyebrow_t="Explore Services", h2="Care Designe
     for gname, items in C.SERVICE_GROUPS:
         links = "".join(f'<li><a href="{href(s)}">{esc(n)}</a></li>' for n, s in items)
         anchor = {"Aesthetics": "aesthetics", "Wellness": "wellness", "Skin Health": "skin-health"}[gname]
-        gcta = btn(f"Explore {gname}", f"services#{anchor}" if not FLAT else f"services.html#{anchor}", "text") if ctas_per_group else ""
+        gcta = btn(f"Explore {gname}", f"services#{anchor}", "text") if ctas_per_group else ""
         groups += f'<div class="sg"><h3>{esc(gname)}</h3><ul class="sg__list">{links}</ul>{gcta}</div>'
     i = p(intro) if intro else ""
     return section(f'''
@@ -512,7 +516,7 @@ FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="p
 def document(meta, body, is_index=False):
     title, desc, slug = meta["title"], meta["description"], meta["slug"]
     canonical = f"{C.SITE_URL}/" if slug == "" else f"{C.SITE_URL}/{slug}/"
-    style = f"<style>{CSS}</style>" if FLAT else '<link rel="stylesheet" href="/assets/styles.css">'
+    style = f"<style>{CSS}</style>" if FLAT else f'<link rel="stylesheet" href="{PREFIX}assets/styles.css">'
     head = f'''<title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{canonical}">
@@ -663,13 +667,13 @@ def page_about():
         "Aesthetic care doesn't have to be about dramatic change. Isabelle's approach centers on thoughtful recommendations and results designed to help you feel refreshed and confident while still feeling like yourself.",
         "Every patient is different. Your facial anatomy, skin, goals, lifestyle, and preferences all matter when determining whether a treatment is appropriate for you.",
         "That's why Isabelle begins with the individual—not the procedure.",
-    ], [btn("Explore Aesthetic Services", "services#aesthetics" if not FLAT else "services.html#aesthetics", "text")], "about-aesthetics", "Natural skin detail — editorial close-up", theme="cream")
+    ], [btn("Explore Aesthetic Services", "services#aesthetics", "text")], "about-aesthetics", "Natural skin detail — editorial close-up", theme="cream")
     placeholder_svg("about-aesthetics", "Natural skin / expression — editorial detail", tone="terracotta")
     b += split("Looking Beyond the Surface", "Wellness That Connects the Pieces", [
         "Isabelle's interest in wellness extends beyond aesthetics. She believes feeling your best can involve many interconnected pieces—from skin health and hormonal changes to weight, hair health, movement, nutrition, and overall well-being.",
         "That perspective has shaped a more comprehensive approach to care and allows Isabelle to support patients through services spanning aesthetics, wellness, and skin health.",
         "It's not about chasing perfection. It's about having knowledgeable support as you decide what feeling your best looks like for you.",
-    ], [btn("Explore Wellness Services", "services#wellness" if not FLAT else "services.html#wellness", "text")], "about-wellness", "Wellness lifestyle — movement, morning light", reverse=True, theme="linen")
+    ], [btn("Explore Wellness Services", "services#wellness", "text")], "about-wellness", "Wellness lifestyle — movement, morning light", reverse=True, theme="linen")
     placeholder_svg("about-wellness", "Wellness lifestyle — walking, outdoors, calm", tone="sage")
     b += split(None, "Skincare Without the Guesswork", [
         "Isabelle has a particular passion for medical-grade skincare and helping patients understand what their skin actually needs. With countless products, ingredients, routines, and trends available, skincare can quickly become overwhelming. Isabelle helps simplify it.",
@@ -987,9 +991,14 @@ def main():
     }
     for k in C.SERVICE_ORDER:
         builders[k] = (C.SERVICES[k], lambda k=k: page_service(k))
+    global PREFIX
     for slug, (meta, fn) in builders.items():
+        PREFIX = "" if (FLAT or slug == "") else "../"
         write(out_path(slug), document(meta, fn(), is_index=(slug == "")))
+    PREFIX = ""
     write(os.path.join(OUT, "404.html"), document(dict(title="Page Not Found | Isabelle Joseph, DNP", description="Page not found.", slug="404"), page_404()))
+    if not FLAT:
+        write(os.path.join(OUT, ".nojekyll"), "")
     if not FLAT:
         write(os.path.join(OUT, "assets", "styles.css"), CSS)
         write(os.path.join(OUT, "robots.txt"), f"User-agent: *\nAllow: /\nSitemap: {C.SITE_URL}/sitemap.xml\n")
