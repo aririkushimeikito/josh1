@@ -156,6 +156,14 @@ mark.ph{background:rgba(193,123,94,.14);color:var(--terracotta-deep);font-family
 .check__outro{grid-column:1/-1;max-width:760px;color:var(--ink-soft);padding-top:.5rem}
 @media (max-width:860px){.check{grid-template-columns:1fr}}
 
+/* FAQ topic jump links — Button/Text blocks linking to section anchors */
+.faq-topics{margin-top:2.5rem;border-top:1px solid var(--rule);padding-top:1.5rem}
+.faq-topics ul{display:flex;flex-wrap:wrap;gap:.6rem;list-style:none;margin:0;padding:0}
+.faq-topics a{display:inline-block;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;padding:.7rem 1rem;border:1px solid var(--rule);border-radius:999px;color:var(--ink-soft);text-decoration:none;min-height:44px;line-height:1.4}
+.faq-topics a:hover{border-color:var(--terracotta);color:var(--terracotta-deep)}
+.faq{scroll-margin-top:100px}
+[id^="faq-"]{scroll-margin-top:90px}
+
 /* accordion — native Squarespace Accordion Block equivalent */
 .faq{display:grid;grid-template-columns:4fr 7fr;gap:clamp(2rem,5vw,5rem);align-items:start}
 .faq__head{position:sticky;top:110px}
@@ -250,6 +258,7 @@ mark.ph{background:rgba(193,123,94,.14);color:var(--terracotta-deep);font-family
 .foot__col ul{list-style:none;margin:0;padding:0;display:grid;gap:.45rem}
 .foot__col a{text-decoration:none;color:var(--brown);display:inline-block;padding:.2rem 0}
 .foot__col a:hover{color:var(--terracotta-deep)}
+.foot__note{font-size:.8rem;color:var(--ink-muted)}
 .foot__legal{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--rule);font-size:.82rem;color:var(--ink-muted)}
 .foot__legal p{max-width:none}
 .foot__disc{max-width:80ch!important;margin-top:.75rem}

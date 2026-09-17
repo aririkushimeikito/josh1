@@ -246,9 +246,10 @@ def footer():
       <div class="foot__col"><h2>Connect</h2><ul>
         <li><a href="{C.BOOK_URL}" target="_blank" rel="noopener">Book With Isabelle</a></li>
         <li><a href="{C.SHOP_URL}" target="_blank" rel="noopener">Shop Skincare</a></li>
-        <li><a href="#" aria-disabled="true">Instagram <mark class="ph">[LINK TO BE PROVIDED]</mark></a></li>
+        <li><a href="{C.CONTACT["instagram_url"]}" target="_blank" rel="noopener">Instagram {esc(C.CONTACT["instagram_handle"])}</a></li>
         <li><a href="#" aria-disabled="true">Facebook <mark class="ph">[LINK TO BE PROVIDED]</mark></a></li>
-        <li><mark class="ph">[EMAIL / PHONE TO BE PROVIDED]</mark></li>
+        <li><a href="mailto:{C.CONTACT["email"]}">{esc(C.CONTACT["email"])}</a></li>
+        <li><a href="sms:{C.CONTACT["phone"].replace("-", "")}">{esc(C.CONTACT["phone"])}</a> <span class="foot__note">({esc(C.CONTACT["phone_note"])})</span></li>
       </ul></div>
     </div>
     <div class="foot__legal">
@@ -418,6 +419,14 @@ mark.ph{background:rgba(193,123,94,.14);color:var(--terracotta-deep);font-family
 .check__outro{grid-column:1/-1;max-width:760px;color:var(--ink-soft);padding-top:.5rem}
 @media (max-width:860px){.check{grid-template-columns:1fr}}
 
+/* FAQ topic jump links — Button/Text blocks linking to section anchors */
+.faq-topics{margin-top:2.5rem;border-top:1px solid var(--rule);padding-top:1.5rem}
+.faq-topics ul{display:flex;flex-wrap:wrap;gap:.6rem;list-style:none;margin:0;padding:0}
+.faq-topics a{display:inline-block;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;padding:.7rem 1rem;border:1px solid var(--rule);border-radius:999px;color:var(--ink-soft);text-decoration:none;min-height:44px;line-height:1.4}
+.faq-topics a:hover{border-color:var(--terracotta);color:var(--terracotta-deep)}
+.faq{scroll-margin-top:100px}
+[id^="faq-"]{scroll-margin-top:90px}
+
 /* accordion — native Squarespace Accordion Block equivalent */
 .faq{display:grid;grid-template-columns:4fr 7fr;gap:clamp(2rem,5vw,5rem);align-items:start}
 .faq__head{position:sticky;top:110px}
@@ -512,6 +521,7 @@ mark.ph{background:rgba(193,123,94,.14);color:var(--terracotta-deep);font-family
 .foot__col ul{list-style:none;margin:0;padding:0;display:grid;gap:.45rem}
 .foot__col a{text-decoration:none;color:var(--brown);display:inline-block;padding:.2rem 0}
 .foot__col a:hover{color:var(--terracotta-deep)}
+.foot__note{font-size:.8rem;color:var(--ink-muted)}
 .foot__legal{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--rule);font-size:.82rem;color:var(--ink-muted)}
 .foot__legal p{max-width:none}
 .foot__disc{max-width:80ch!important;margin-top:.75rem}
@@ -915,24 +925,41 @@ def page_skincare_consultations():
     return b
 
 def page_faqs():
-    b = section(f'''<div class="page-intro">{eyebrow("FAQs")}<h1>{esc(C.PAGES["faqs"]["h1"])}</h1>
-    {p(["Straightforward answers about treatments, wellness care, and skincare with Isabelle Joseph, DNP, NP-BC. If you don't see your question, bring it to your consultation."])}
-    <div class="cta-row">{book_btn()}</div></div>''', "cream")
-    general = [
-        ("How does concierge care work?", "Isabelle brings personalized aesthetic, wellness, and skincare care directly to you—at your home, office, or another convenient location. [ADDITIONAL DETAIL TO BE PROVIDED]"),
-        ("Where does Isabelle provide care?", C.CONCIERGE_AREA_P + " Wellness programs such as GLP-1 weight management, HRT, and hair loss may support a broader area—confirm during intake."),
-        ("How do I book an appointment?", "Appointments are scheduled securely through Skin Clique using the Book With Isabelle button on this site. You don't need to choose a treatment before booking—you can start with a consultation."),
-        ("What does an appointment cost?", "Pricing, packages, and promotions are provided through Skin Clique at the time of booking. [BOOKING / PAYMENT POLICY DETAILS TO BE PROVIDED]"),
-    ]
-    b += faq("General + Booking", general, theme="linen", eyebrow_t="General")
-    themes = ["cream", "linen"]
-    for i, key in enumerate(C.SERVICE_ORDER):
-        s = C.SERVICES[key]
-        b += faq(s["name"], s["faq"], theme=themes[i % 2], eyebrow_t=s["group"],
-                 intro=[f"Learn more on the {s['name']} page."]).replace(
-                     f"Learn more on the {esc(s['name'])} page.",
-                     f'Learn more on the <a href="{href(s["slug"])}">{esc(s["name"])} page</a>.')
-    b += cta_band("Still Have Questions?", ["Start with a conversation. Isabelle can help you understand your options and determine an appropriate next step."], [book_btn("Book With Isabelle")], theme="brown")
+    import json
+    groups = [("general", "General + Booking", "General", C.FAQ_GENERAL, ["Everything you need to know before your first visit."])]
+    for key in C.SERVICE_ORDER:
+        sv = C.SERVICES[key]
+        items = list(sv["faq"]) + C.FAQ_EXTRA.get(key, [])
+        label = "Tox (Xeomin, Dysport, Botox)" if key == "tox" else sv["name"]
+        groups.append((key, label, sv["group"], items, [f"Learn more on the {sv['name']} page."]))
+    groups.append(("skincare", "Prescription + Medical-Grade Skincare", "Skin Health", C.FAQ_SKINCARE, ["Learn more on the Skincare page."]))
+    groups.append(("practice", "About the Practice", "Practice", C.FAQ_PRACTICE, ["Learn more about Isabelle on the About page."]))
+
+    chips = "".join(f'<li><a href="#faq-{k}">{esc(lbl.split(" (")[0])}</a></li>' for k, lbl, *_ in groups)
+    b = section(f'''<div class="page-intro">{eyebrow("FAQ")}<h1>{esc(C.PAGES["faqs"]["h1"])}</h1>
+    {p(["Answers to the questions Isabelle hears most about concierge care, aesthetic treatments, wellness programs, and skincare. Jump to a topic or browse them all."])}
+    <div class="cta-row">{book_btn()}</div></div>
+    <nav class="faq-topics" aria-label="FAQ topics"><ul>{chips}</ul></nav>''', "cream")
+
+    themes = ["linen", "cream"]
+    page_links = {"tox": "tox", "hyperhidrosis": "hyperhidrosis", "chemical-peels": "chemical-peels", "weight-loss": "weight-loss",
+                  "hormone-replacement-therapy": "hormone-replacement-therapy", "hair-loss": "hair-loss", "skincare": "skincare", "practice": "about"}
+    for i, (k, lbl, eb, items, intro) in enumerate(groups):
+        html_ = faq(lbl, items, theme=themes[i % 2], eyebrow_t=eb, intro=intro)
+        html_ = html_.replace('<section class="sec sec--' + themes[i % 2] + ' ">', f'<section class="sec sec--{themes[i % 2]} " id="faq-{k}">', 1)
+        if k in page_links:
+            name = {"skincare": "Skincare", "practice": "About"}.get(k, C.SERVICES[k]["name"] if k in C.SERVICES else k)
+            html_ = html_.replace(f"on the {esc(name)} page", f'on the <a href="{href(page_links[k])}">{esc(name)} page</a>')
+            html_ = html_.replace("Learn more about Isabelle on the About page.", f'Learn more about Isabelle on the <a href="{href("about")}">About page</a>.')
+        b += html_
+
+    # FAQPage structured data (native Squarespace: Settings -> Advanced -> Code Injection, or the page's header injection)
+    entities = [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for _, _, _, items, _ in groups for q, a in items]
+    ld = json.dumps({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": entities}, ensure_ascii=False)
+    b += f'<script type="application/ld+json">{ld}</script>'
+    b += cta_band("Still Have Questions?", ["Book a consultation and Isabelle will cover everything specific to your goals.",
+                  f"Prefer to text? Reach Isabelle at {C.CONTACT['phone']} ({C.CONTACT['phone_note'].lower()})."],
+                  [book_btn("Book a Consultation")], theme="brown")
     return b
 
 def page_blog():
@@ -965,7 +992,8 @@ def page_book():
       <div class="split__text">
         {eyebrow("Questions Before Booking?")}
         <h2>We're Happy to Help.</h2>
-        {p(["Browse the FAQs, or reach out directly. [CONTACT EMAIL / PHONE / FORM TO BE PROVIDED — a native Squarespace Form Block can be placed here if a contact form is desired.]"])}
+        {p(["Browse the FAQs, or reach out directly."])}
+        <p>Text: <a href="sms:{C.CONTACT["phone"].replace("-", "")}">{esc(C.CONTACT["phone"])}</a> ({esc(C.CONTACT["phone_note"].lower())})<br>Email: <a href="mailto:{C.CONTACT["email"]}">{esc(C.CONTACT["email"])}</a><br>Instagram: <a href="{C.CONTACT["instagram_url"]}" target="_blank" rel="noopener">{esc(C.CONTACT["instagram_handle"])}</a></p>
         <div class="cta-row">{btn("Read the FAQs", "faqs", "secondary")}{btn("Shop Skincare", C.SHOP_URL, "text")}</div>
       </div>
     </div>''', "linen")

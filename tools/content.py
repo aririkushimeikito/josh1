@@ -856,3 +856,49 @@ BLOG_LAUNCH = [
     ("GLP-1 Weight Loss: What You Should Know Before Getting Started", "Wellness"),
 ]
 BLOG_CATEGORIES = ["Skin", "Wellness", "Aesthetics", "Education", "Lifestyle"]
+
+# ---------------------------------------------------------------- contact (from the previous site's faq.html footer)
+CONTACT = dict(
+    email="isabellejoseph@skinclique.com",
+    phone="617-634-5416",
+    phone_note="Text only",
+    instagram_handle="@isabellejosephDNP",
+    instagram_url="https://www.instagram.com/isabellejosephDNP",
+)
+
+# ---------------------------------------------------------------- FAQ page extras (from the previous site's faq.html)
+FAQ_GENERAL = [
+    ("Do I need a consultation before booking a treatment?", "Yes—every new patient starts with a consultation so Isabelle can review your health history, discuss your goals, and make sure any treatment is safe and appropriate for you."),
+    ("Where do treatments take place?", "As a Skin Clique concierge provider, Isabelle comes to you—treatments are typically done in a comfortable, private setting of your choosing rather than a traditional clinic."),
+    ("How do I book an appointment?", f"You can book directly through Isabelle's Skin Clique provider page using the Book With Isabelle button on this site, or text {CONTACT['phone']} (text only) to get started."),
+    ("What areas do you serve?", "Isabelle is based in South Easton, MA and serves surrounding communities as a concierge provider, including Norwell, Randolph, Somerset, Stoughton, and Westwood."),
+]
+FAQ_PRACTICE = [
+    ("What are Isabelle's credentials?", "Isabelle holds a Doctor of Nursing Practice (DNP) and is dual board certified as a Family Nurse Practitioner (FNP-BC) and Adult-Gerontology Acute Care Nurse Practitioner (AG-ACNP-BC), trained at the University of Pennsylvania."),
+    ("Do you sell skincare products directly?", "Yes—medical-grade skincare is available to order through Isabelle's Skin Clique storefront, linked throughout this site."),
+]
+FAQ_SKINCARE = [
+    ("How is prescription skincare different from what I can buy in stores?", "Prescription-strength formulations use higher concentrations of active ingredients than what's legally available over the counter, which often means faster, more predictable results."),
+    ("How long until I see results?", "Most patients begin noticing changes within 6–12 weeks of consistent use, though this varies by concern and formulation."),
+    ("Can I use Rx skincare alongside other treatments?", "Yes—Rx skincare is often used to maintain and extend the results of in-office treatments like peels and neuromodulators."),
+]
+# Extra questions merged into the service groups (near-duplicates of blueprint FAQs were not repeated)
+FAQ_EXTRA = {
+    "tox": [
+        ("Is Xeomin the same as Botox?", "Xeomin and Botox are both neuromodulators from the same drug class, but Xeomin does not contain accessory proteins, which some patients prefer. Skin Clique offers Xeomin, Dysport, and Botox; Isabelle can help determine which is appropriate for you."),
+    ],
+    "chemical-peels": [
+        ("How many peels will I need?", "This depends on your skin goals—some concerns respond to a single peel, while others benefit from a series spaced several weeks apart."),
+        ("Will my skin actually peel?", "Depending on the depth of the peel, you may see visible flaking for a few days—this is a normal part of the resurfacing process. Lighter peels may produce little or no visible peeling."),
+        ("Can I wear makeup after a peel?", "It's best to let your skin settle for at least 24 hours, and specific guidance will be part of your aftercare instructions."),
+    ],
+    "weight-loss": [
+        ("Am I a candidate for GLP-1 weight management?", "Candidacy is determined during a full clinical consultation that reviews your health history, current medications, and goals."),
+        ("How often are follow-up visits?", "Follow-up frequency depends on your individual titration schedule, but regular monitoring is a required part of the program. Skin Clique's current program includes monthly provider follow-up."),
+        ("What side effects should I expect?", "Common side effects can include mild nausea or GI upset, especially during dose increases—these are discussed in detail during your consultation and monitored throughout treatment."),
+    ],
+    "hair-loss": [
+        ("What causes hair thinning?", "Causes range from genetics (androgenetic hair loss) to stress, postpartum hormonal shifts, and nutritional factors—your consultation will help identify the likely cause for you."),
+        ("Does hair loss treatment work for women too?", "Yes—hair thinning affects people of all genders, and treatment plans are tailored to the individual."),
+    ],
+}

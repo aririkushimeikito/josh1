@@ -131,7 +131,7 @@ Both fonts are in Squarespace's Google Fonts list. Mobile: H1 38–42px, H2 30px
 1. Brand: "Isabelle Joseph, DNP, NP-BC", tagline, service-area line, Book button.
 2. Explore: Meet Isabelle · Services · Skincare · The Isabelle Edit · FAQs.
 3. Services: Tox · Hyperhidrosis · Chemical Peels · GLP-1 Weight Management · HRT · Hair Loss · Prescription Skincare · Skincare Consultations.
-4. Connect: Book With Isabelle · Shop Skincare · Instagram `[LINK]` · Facebook `[LINK]` · `[EMAIL/PHONE]`.
+4. Connect: Book With Isabelle · Shop Skincare · Instagram @isabellejosephDNP · Facebook `[LINK]` · isabellejoseph@skinclique.com · 617-634-5416 (text only).
 Legal row: © year · Privacy Policy · Terms · `[HEALTHCARE DISCLAIMER]` · educational disclaimer.
 
 ### Imagery
@@ -216,7 +216,7 @@ H1 "Skincare Shouldn't Be Guesswork." Hero (Shop Skincare primary, Book consulta
 Hero → Concerns (feature list, Linen) → What to Expect (3 steps, last step marked `[DETAILS TO BE PROVIDED]`) → Related pair → Final CTA.
 
 ### 7. FAQs `/faqs`
-Page intro + Book → **General + Booking** accordion (3 items marked placeholder) → one Accordion Block per service (Tox 9 · Hyperhidrosis 12 · Chemical Peels 9 · GLP-1 12 · HRT 11 · Hair Loss 14), alternating Cream/Linen, each with a link back to its service page → "Still Have Questions?" CTA.
+Page intro + Book → topic jump row (Button blocks styled as pills, each linking to a section anchor; no JavaScript) → one Accordion Block per group, alternating Cream/Linen, each with a link back to its page: General + Booking 4 · Tox 10 · Hyperhidrosis 12 · Chemical Peels 12 · GLP-1 15 · HRT 11 · Hair Loss 16 · Prescription + Medical-Grade Skincare 3 · About the Practice 2 (85 total; blueprint FAQs plus the previous site's faq.html content) → "Still Have Questions?" CTA with the text-only number. Add the FAQPage JSON-LD to the page's header code injection for rich results.
 
 ### 8. The Isabelle Edit `/blog`
 Native **Blog Page**, layout "Grid", 3 columns, image 4:3, show category + title + excerpt. Create categories: Skin, Wellness, Aesthetics, Education, Lifestyle. Draft the 3 launch posts as **drafts** (titles from blueprint) until content arrives. Below the list: Related Pair (Explore Services / Book).
@@ -318,8 +318,8 @@ Squarespace: enter SEO title/description per page under Page Settings → SEO. S
 - 3–5 approved patient testimonials (with permission + Skin Clique approval).
 - Selected skincare products / categories and short education copy for the Skincare page.
 - Skincare Consultations: any additional detail on format, duration, or what's included.
-- General + Booking FAQ answers (concierge logistics, payment/booking policy, cancellation).
-- Contact email / phone, Instagram and Facebook URLs.
+- Payment / cancellation policy FAQ answers, if wanted (booking logistics are now covered).
+- Facebook URL (email, text number, and Instagram are in place from the previous site).
 - Privacy Policy, Terms, and healthcare/site disclaimer text.
 - The 3 launch articles for The Isabelle Edit (titles supplied; bodies not).
 - Confirmation of whether `/skincare-consultations` should stay a separate page or merge into `/skincare`.
