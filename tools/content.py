@@ -934,6 +934,26 @@ PHOTOS = {
     "product-4":        ("product-4.jpg", "50% 50%", "Holding a hydrating treatment serum"),
     # Book
     "book-hero":        ("book-hero.jpg", "50% 40%", "Packing skincare into a bag before a concierge appointment"),
+    # Remaining sections, filled by reusing the supplied photos with different crops
+    "home-area":        ("about-concierge.jpg", "50% 50%", "Skincare packed into a suitcase, ready to travel to patients across the South Shore"),
+    "about-hero":       ("home-hero.jpg", "18% 40%", "Isabelle Joseph, DNP, NP-BC with a patient during an assessment"),
+    "about-wellness":   ("concierge-kit.jpg", "50% 80%", "Hand weights beside Isabelle's concierge kit"),
+    "services-concierge": ("about-concierge.jpg", "50% 50%", "Concierge supplies packed in a suitcase for a home visit"),
+    "tox-concierge":    ("concierge-kit.jpg", "50% 40%", "Isabelle's concierge kit, ready for an at-home Tox appointment"),
+    "hyperhidrosis-approach": ("home-hero.jpg", "50% 35%", "Isabelle talking with a patient during an assessment"),
+    "hyperhidrosis-concierge": ("consult-hero.jpg", "50% 45%", "Selecting supplies from Isabelle's concierge bag"),
+    "glp1-hero":        ("concierge-kit.jpg", "50% 70%", "Hand weights and Isabelle's concierge kit, ready for a wellness visit"),
+    "glp1-approach":    ("home-hero.jpg", "18% 40%", "Isabelle Joseph, DNP, NP-BC in conversation with a patient"),
+    "weight-loss-concierge": ("tox-hero.jpg", "50% 35%", "Isabelle working one-on-one with a patient"),
+    "hrt-hero":         ("skincare-hero.jpg", "50% 40%", "A woman at ease at home in a robe"),
+    "hrt-approach":     ("home-hero.jpg", "50% 35%", "Isabelle in conversation with a patient"),
+    "hormone-replacement-therapy-concierge": ("about-concierge.jpg", "50% 50%", "Supplies packed for a concierge visit"),
+    "hair-hero":        ("natural-skin-profile.jpg", "65% 30%", "Profile with long, healthy-looking hair"),
+    "hair-approach":    ("tox-hero.jpg", "50% 35%", "Isabelle assessing a patient, attentive and listening"),
+    "hair-loss-concierge": ("book-hero.jpg", "50% 40%", "Packing supplies before a concierge appointment"),
+    "post-1":           ("tox-approach.jpg", "50% 30%", "Isabelle preparing a neuromodulator treatment"),
+    "post-2":           ("journal-skincare.jpg", "50% 50%", "Medical-grade skincare products on a counter"),
+    "post-3":           ("skincare-hero.jpg", "50% 40%", "A woman in a robe holding her skincare routine"),
 }
 # Skincare page tiles: category labels from the blueprint's own list of routine components
 PRODUCT_TILES = [

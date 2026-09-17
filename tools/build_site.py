@@ -1074,7 +1074,7 @@ def out_path(slug):
         return os.path.join(OUT, "index.html" if slug == "" else f"{slug}.html")
     return os.path.join(OUT, "index.html" if slug == "" else os.path.join(slug, "index.html"))
 
-GENERATED = ["index.html", "404.html", "robots.txt", "sitemap.xml", ".nojekyll", "assets", "images"]
+GENERATED = ["index.html", "404.html", "robots.txt", "sitemap.xml", ".nojekyll", os.path.join("assets", "styles.css"), "images"]
 
 def clean():
     """Remove previously generated output only (never the whole repo root)."""

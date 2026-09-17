@@ -308,7 +308,7 @@ Squarespace: enter SEO title/description per page under Page Settings → SEO. S
 
 **Images — supplied and in place (from `assets/images/`):** Home hero (Hero.jpeg), Home "Meet Isabelle" (IMG_5581), Tox hero and approach, Hyperhidrosis hero, Services hero, Skincare hero and philosophy, Skincare Consultations hero, Book hero, About aesthetics / skincare / concierge / personal, Chemical Peels hero, approach and concierge, four Skincare product tiles, Home concierge and skincare still lifes, and 19 before/after results used in the Tox, Chemical Peels, Skincare, and Home galleries. Web-sized copies live in `images/`; originals stay in `assets/images/`.
 
-**Images still on placeholders (19):** Home service-area landscape; About hero portrait and wellness lifestyle; Hyperhidrosis approach and concierge; GLP-1 hero, approach and concierge; HRT hero, approach and concierge; Hair Loss hero, approach and concierge; Tox concierge; three article covers for The Isabelle Edit.
+**Images:** every section now carries a supplied photo. Sections with no dedicated shot (GLP-1, HRT, Hair Loss, Hyperhidrosis, article covers, About hero, service area) reuse the provider, kit, and lifestyle photos with different crops; replace them by dropping a new file into `images/` under the section's placeholder name (see `PHOTOS` in `tools/content.py`).
 - **Before/after consent:** confirm each patient's written permission (and any Skin Clique requirements) for the results photos before launch.
 - Logo / wordmark file if one exists (currently a text site title).
 
