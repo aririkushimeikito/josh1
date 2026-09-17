@@ -1,0 +1,46 @@
+# Netlify configuration for isabellejosephdnp.com
+# The static preview in ./site is the publish directory. No build step is required.
+
+[build]
+  publish = "site"
+  command = ""
+
+# Preserve SEO equity from the previous site's URLs (see original sitemap.xml)
+[[redirects]]
+  from = "/about.html"
+  to = "/about/"
+  status = 301
+[[redirects]]
+  from = "/services-xeomin.html"
+  to = "/tox/"
+  status = 301
+[[redirects]]
+  from = "/services-chemical-peels.html"
+  to = "/chemical-peels/"
+  status = 301
+[[redirects]]
+  from = "/services-rx-skincare.html"
+  to = "/skincare/"
+  status = 301
+[[redirects]]
+  from = "/services-glp1-weight-management.html"
+  to = "/weight-loss/"
+  status = 301
+[[redirects]]
+  from = "/services-hair-loss.html"
+  to = "/hair-loss/"
+  status = 301
+[[redirects]]
+  from = "/faq.html"
+  to = "/faqs/"
+  status = 301
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

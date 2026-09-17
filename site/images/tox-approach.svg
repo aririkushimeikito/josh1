@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" width="1200" height="1500" role="img" aria-label="Isabelle in consultation — detail crop">
+<rect width="1200" height="1500" fill="#DCE2D5"/>
+<circle cx="816" cy="510" r="312" fill="#6F8066" opacity=".16"/>
+<rect x="96" y="840" width="624" height="540" fill="#6F8066" opacity=".12"/>
+<line x1="96" y1="750" x2="1104" y2="750" stroke="#6F8066" stroke-opacity=".35" stroke-width="2"/>
+<text x="96" y="705" font-family="Georgia, 'Times New Roman', serif" font-size="102" fill="#2C2318" opacity=".55">Image</text>
+<text x="96" y="834" font-family="Helvetica, Arial, sans-serif" font-size="38" letter-spacing="3" fill="#6F8066">TO BE PROVIDED</text>
+<text x="96" y="894" font-family="Helvetica, Arial, sans-serif" font-size="34" fill="#5C4F42">Isabelle in consultation — detail crop</text>
+</svg>
