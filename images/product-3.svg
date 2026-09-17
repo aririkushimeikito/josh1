@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000" role="img" aria-label="Product image 3">
-<rect width="1000" height="1000" fill="#DCE2D5"/>
-<circle cx="680" cy="340" r="260" fill="#6F8066" opacity=".16"/>
-<rect x="80" y="560" width="520" height="360" fill="#6F8066" opacity=".12"/>
-<line x1="80" y1="500" x2="920" y2="500" stroke="#6F8066" stroke-opacity=".35" stroke-width="2"/>
-<text x="80" y="470" font-family="Georgia, 'Times New Roman', serif" font-size="85" fill="#2C2318" opacity=".55">Image</text>
-<text x="80" y="570" font-family="Helvetica, Arial, sans-serif" font-size="32" letter-spacing="3" fill="#6F8066">TO BE PROVIDED</text>
-<text x="80" y="620" font-family="Helvetica, Arial, sans-serif" font-size="28" fill="#5C4F42">Product image 3</text>
-</svg>

@@ -306,12 +306,10 @@ Squarespace: enter SEO title/description per page under Page Settings → SEO. S
 
 ## G. Content Requirements (still to be supplied)
 
-**Images (42 placeholders, named in `images/`):**
-- Home: hero portrait; seated editorial portrait; concierge doorway/at-home shot; skincare still life; local landscape (South Easton); 3 article covers.
-- About: full-length portrait; natural-skin detail; wellness lifestyle; skincare routine; home-visit shot; candid personal (beach/travel).
-- Services hub: hero with treatment kit; concierge appointment.
-- Each service page (×6): hero image, "approach" image, concierge image.
-- Skincare: hero; philosophy shot; 4 product images. Consultations: hero. Book: welcoming portrait.
+**Images — supplied and in place (from `assets/images/`):** Home hero (Hero.jpeg), Tox hero and approach, Hyperhidrosis hero, Services hero, Skincare hero and philosophy, Skincare Consultations hero, Book hero, About aesthetics / skincare / concierge / personal, Chemical Peels hero, approach and concierge, four Skincare product tiles, Home concierge and skincare still lifes, and 19 before/after results used in the Tox, Chemical Peels, Skincare, and Home galleries. Web-sized copies live in `images/`; originals stay in `assets/images/`.
+
+**Images still on placeholders (20):** Home "Meet Isabelle" portrait and service-area landscape; About hero portrait and wellness lifestyle; Hyperhidrosis approach and concierge; GLP-1 hero, approach and concierge; HRT hero, approach and concierge; Hair Loss hero, approach and concierge; Tox concierge; three article covers for The Isabelle Edit.
+- **Before/after consent:** confirm each patient's written permission (and any Skin Clique requirements) for the results photos before launch.
 - Logo / wordmark file if one exists (currently a text site title).
 
 **Copy / information:**

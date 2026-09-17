@@ -253,6 +253,7 @@ mark.ph{background:rgba(193,123,94,.14);color:var(--terracotta-deep);font-family
 /* products */
 .products{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
 .product .ph-img{aspect-ratio:1;margin-bottom:.9rem}
+.product .ph-img--real img{object-fit:cover}
 .product h3{font-family:var(--sans);font-size:1rem;font-weight:600}
 .product p{font-size:.92rem;color:var(--ink-soft)}
 @media (max-width:1024px){.products{grid-template-columns:repeat(3,1fr)}}

@@ -546,6 +546,7 @@ mark.ph{background:rgba(193,123,94,.14);color:var(--terracotta-deep);font-family
 /* products */
 .products{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
 .product .ph-img{aspect-ratio:1;margin-bottom:.9rem}
+.product .ph-img--real img{object-fit:cover}
 .product h3{font-family:var(--sans);font-size:1rem;font-weight:600}
 .product p{font-size:.92rem;color:var(--ink-soft)}
 @media (max-width:1024px){.products{grid-template-columns:repeat(3,1fr)}}
@@ -930,9 +931,9 @@ def page_skincare():
         ("Medical-Grade Skincare", "Great skincare isn't about having more products. It's about having the right ones. Isabelle can help you understand medical-grade skincare, active ingredients, and how different products may fit into an effective routine. Explore her recommendations and shop products through her Skin Clique storefront.", shop_btn("Shop With Isabelle", "text")),
     ], theme="linen", cols=3)
     prods = ""
-    for i in range(1, 5):
+    for i, (name, desc) in enumerate(C.PRODUCT_TILES, 1):
         placeholder_svg(f"product-{i}", f"Product image {i}", 1000, 1000, tone=["cream", "linen", "sage", "cream"][i-1])
-        prods += f'<div class="product">{figure(f"product-{i}", "Product image")}<h3>{rich("[PRODUCT / CATEGORY NAME]")}</h3><p>{rich("[SHORT PRODUCT EDUCATION COPY TO BE PROVIDED]")}</p></div>'
+        prods += f'<div class="product">{figure(f"product-{i}", "Product image")}<h3>{rich(name)}</h3><p>{rich(desc)}</p></div>'
     b += section(f'''
     <div class="sec-head">{eyebrow("Shop My Skincare")}<h2>Selected Products + Categories</h2>
     {p(["Products Isabelle recommends are available through her Skin Clique storefront. [SELECTED PRODUCTS / CATEGORIES TO BE PROVIDED BY ISABELLE]"])}</div>

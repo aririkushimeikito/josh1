@@ -906,13 +906,41 @@ FAQ_EXTRA = {
 # ---------------------------------------------------------------- supplied photography
 # Placeholder name -> (file in images/, focal point, alt text). One photo may serve several placeholders.
 PHOTOS = {
+    # Home
+    "home-hero":        ("home-hero.jpg", "50% 35%", "Isabelle Joseph, DNP, NP-BC assessing a patient's face before an injectable treatment"),
     "home-concierge":   ("concierge-kit.jpg", "50% 60%", "Isabelle's concierge kit packed with skincare, ready for a home visit"),
-    "services-hero":    ("concierge-kit.jpg", "50% 45%", "Concierge treatment kit with medical-grade skincare, packed for an appointment"),
-    "skincare-hero":    ("concierge-kit.jpg", "50% 25%", "Medical-grade skincare products packed in Isabelle's concierge bag"),
+    "home-skincare":    ("home-skincare.jpg", "50% 50%", "Medical-grade skincare products laid out with Isabelle's concierge bag"),
+    # About
     "about-aesthetics": ("natural-skin-profile.jpg", "50% 30%", "Profile of a patient with natural, healthy-looking skin"),
-    "peels-hero":       ("natural-skin-profile.jpg", "50% 30%", "Close profile showing smooth, even-looking skin"),
+    "about-skincare":   ("about-skincare.jpg", "50% 50%", "An edited skincare routine packed into a bag"),
+    "about-concierge":  ("about-concierge.jpg", "50% 50%", "Skincare packed into a suitcase, ready to travel to a patient"),
     "about-personal":   ("about-personal.jpg", "50% 30%", "Isabelle at home during the holidays, holding a baby in front of the Christmas tree"),
+    # Services + service pages
+    "services-hero":    ("concierge-kit.jpg", "50% 45%", "Concierge treatment kit with medical-grade skincare, packed for an appointment"),
+    "tox-hero":         ("tox-hero.jpg", "50% 35%", "Isabelle Joseph, DNP, NP-BC assessing a patient's facial movement before a Tox treatment"),
+    "tox-approach":     ("tox-approach.jpg", "50% 30%", "Isabelle preparing a neuromodulator syringe"),
+    "hyperhidrosis-hero": ("tox-approach.jpg", "50% 30%", "Isabelle preparing a neurotoxin injection for treatment"),
+    "peels-hero":       ("natural-skin-profile.jpg", "50% 30%", "Close profile showing smooth, even-looking skin"),
+    "peels-approach":   ("peels-approach.jpg", "50% 50%", "Isabelle holding a professional peel solution"),
+    "chemical-peels-concierge": ("chemical-peels-concierge.jpg", "50% 50%", "Professional skincare and post-peel products set up for an at-home treatment"),
+    # Skin health
+    "skincare-hero":    ("skincare-hero.jpg", "50% 40%", "Patient in a robe holding a set of medical-grade skincare products"),
+    "skincare-philosophy": ("skincare-philosophy.jpg", "50% 50%", "Applying a medical-grade skincare product at the bathroom vanity"),
+    "consult-hero":     ("consult-hero.jpg", "50% 45%", "Selecting skincare products from Isabelle's bag"),
+    "product-1":        ("product-1.jpg", "50% 50%", "Unboxing a medical-grade cleanser"),
+    "product-2":        ("product-2.jpg", "50% 50%", "Holding an antioxidant serum"),
+    "product-3":        ("product-3.jpg", "50% 50%", "Dispensing a targeted serum with a dropper"),
+    "product-4":        ("product-4.jpg", "50% 50%", "Holding a hydrating treatment serum"),
+    # Book
+    "book-hero":        ("book-hero.jpg", "50% 40%", "Packing skincare into a bag before a concierge appointment"),
 }
+# Skincare page tiles: category labels from the blueprint's own list of routine components
+PRODUCT_TILES = [
+    ("Medical-Grade Cleansers", "Gentle, effective cleansing selected for your skin type. [PRODUCT DETAILS TO BE PROVIDED]"),
+    ("Antioxidant Serums", "Daily protection and support for tone and radiance. [PRODUCT DETAILS TO BE PROVIDED]"),
+    ("Targeted Treatments", "Retinoids and pigment-focused products when appropriate for your skin. [PRODUCT DETAILS TO BE PROVIDED]"),
+    ("Hydration + Repair", "Moisturizers and barrier support to round out a realistic routine. [PRODUCT DETAILS TO BE PROVIDED]"),
+]
 
 # Before-and-after results shown in "Real Results" galleries. Captions describe the area only; no outcome claims.
 RESULTS = {
