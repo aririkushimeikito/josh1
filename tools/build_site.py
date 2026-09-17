@@ -35,6 +35,8 @@ REAL_EXTS = (".jpg", ".jpeg", ".png", ".webp")
 
 def real_image(name):
     """Return the filename of a supplied photo for this placeholder name, if one exists."""
+    if name in C.PHOTOS and os.path.isfile(os.path.join(IMAGES_DIR, C.PHOTOS[name][0])):
+        return C.PHOTOS[name][0]
     for ext in REAL_EXTS:
         if os.path.isfile(os.path.join(IMAGES_DIR, name + ext)):
             return name + ext
@@ -73,6 +75,8 @@ def eyebrow(t):
     return f'<p class="eyebrow">{rich(t)}</p>' if t else ""
 
 def figure(name, alt, cls="", focus=None):
+    if name in C.PHOTOS:
+        _, focus, alt = C.PHOTOS[name][0], focus or C.PHOTOS[name][1], C.PHOTOS[name][2]
     style = f' style="object-position:{focus}"' if focus else ""
     if real_image(name):
         return f'<figure class="ph-img ph-img--real {cls}"><img src="{img(name)}" alt="{esc(alt)}" loading="lazy"{style}></figure>'
@@ -192,6 +196,18 @@ def cta_band(h2, paras, ctas, theme="brown"):
       {p(paras)}
       <div class="cta-row">{"".join(ctas)}</div>
     </div>''', theme, "sec--band")
+
+def results_gallery(items, h2="Real Results", intro=None, theme="linen", eyebrow_t="Before + After", cta=None):
+    figs = "".join(f'<figure class="result"><img src="{img_file(f)}" alt="{esc(cap)}" loading="lazy"><figcaption>{esc(cap)}</figcaption></figure>' for f, cap in items)
+    i = p(intro) if intro else ""
+    c = f'<div class="cta-row">{cta}</div>' if cta else ""
+    return section(f'''
+    <div class="sec-head">{eyebrow(eyebrow_t)}<h2>{rich(h2)}</h2>{i}</div>
+    <div class="results results--{min(len(items), 3)}">{figs}</div>
+    <p class="note">{esc(C.RESULTS_NOTE)}</p>{c}''', theme)
+
+def img_file(fn):
+    return f"images/{fn}" if FLAT else f"{PREFIX}images/{fn}"
 
 def related_pair(items, theme="cream"):
     cols = "".join(f'<div class="rel"><h2>{rich(t)}</h2>{p(ps)}<div class="cta-row">{btn(l, s, "text")}</div></div>'
@@ -480,6 +496,21 @@ mark.ph{background:rgba(193,123,94,.14);color:var(--terracotta-deep);font-family
 .concern-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0 clamp(2rem,5vw,4.5rem);border-top:1px solid var(--rule)}
 @media (max-width:640px){.concern-grid{grid-template-columns:1fr}}
 
+/* before/after results — native Squarespace Gallery Block (grid) equivalent */
+.results{columns:3;column-gap:clamp(1rem,2.5vw,2rem)}
+.results--2{columns:2}
+.result{margin:0 0 clamp(1rem,2.5vw,2rem);display:block;text-decoration:none;color:inherit;break-inside:avoid}
+.result img{width:100%;height:auto;display:block;border-radius:var(--radius);background:var(--linen-deep)}
+.results--4{columns:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(1rem,2.5vw,2rem);align-items:start}
+.results--4 .result{margin:0}
+.results--4 img{aspect-ratio:3/4;object-fit:cover;object-position:50% 50%}
+.result figcaption,.result__cap{display:block;margin-top:.6rem;font-size:.85rem;color:var(--ink-soft);line-height:1.4}
+.result__cap strong{font-weight:600;color:var(--brown);margin-right:.35rem}
+.result--link:hover img{opacity:.92}
+.result--link:hover .result__cap strong{color:var(--terracotta-deep)}
+@media (max-width:1024px){.results{columns:2}.results--4{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.results{columns:1}.results--4{grid-template-columns:1fr}.results--4 img{aspect-ratio:4/5}}
+
 /* testimonials — text blocks in Fluid Engine */
 .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,3vw,3rem)}
 .quote{border-top:2px solid var(--terracotta);padding-top:1.25rem}
@@ -534,7 +565,7 @@ mark.ph{background:rgba(193,123,94,.14);color:var(--terracotta-deep);font-family
 .foot__area{color:var(--ink-soft);font-size:.9rem;max-width:34ch}
 .foot__col h2{font-family:var(--sans);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--sage-deep);margin-bottom:1rem}
 .foot__col ul{list-style:none;margin:0;padding:0;display:grid;gap:.45rem}
-.foot__col a{text-decoration:none;color:var(--brown);display:inline-block;padding:.2rem 0}
+.foot__col a{text-decoration:none;color:var(--brown);display:inline-block;padding:.2rem 0;overflow-wrap:anywhere}
 .foot__col a:hover{color:var(--terracotta-deep)}
 .foot__note{font-size:.8rem;color:var(--ink-muted)}
 .foot__legal{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--rule);font-size:.82rem;color:var(--ink-muted)}
@@ -629,6 +660,13 @@ def page_home():
       </div>
     </div>''', "linen")
     placeholder_svg("home-concierge", "Concierge visit — doorway, natural light, at-home setting", tone="terracotta")
+    # real results
+    figs = "".join(f'<a class="result result--link" href="{href(slug)}"><img src="{img_file(f)}" alt="{esc(area)} — before and after" loading="lazy"><span class="result__cap"><strong>{esc(area)}</strong> {esc(svc)}</span></a>' for f, area, svc, slug in C.RESULTS_HOME)
+    b += section(f'''
+    <div class="sec-head">{eyebrow("Real Results")}<h2>Thoughtful Treatment. Natural-Looking Results.</h2>
+    {p(["A few of the concerns Isabelle treats, shown before and after. Explore each service to learn what to expect."])}</div>
+    <div class="results results--4">{figs}</div>
+    <p class="note">{esc(C.RESULTS_NOTE)}</p>''', "cream")
     # discovery
     concerns = [
         ("Fine Lines + Wrinkles", "Explore options designed to soften the appearance of dynamic lines while maintaining natural expression.", "Explore Tox", "tox"),
@@ -838,8 +876,11 @@ def page_service(key):
     b += feature_list("Who It May Be For", s["addresses_h2"], [s["addresses_intro"]] if s.get("addresses_intro") else [], s["addresses"],
                       cta=book_btn(s["addresses_cta"]), theme="cream", sub=s.get("addresses_sub"), note=s.get("addresses_note"),
                       cols=2 if len(s["addresses"]) != 3 else 3)
+    if key in C.RESULTS:
+        b += results_gallery(C.RESULTS[key], intro=[f"A look at the areas Isabelle treats with {s['name'].lower() if key != 'tox' else 'Tox'}."], theme="linen",
+                             cta=book_btn(s["addresses_cta"]))
     for h, sub, paras in s.get("extra_after_addresses", []):
-        b += prose(None, h, paras, theme="linen", sub=sub)
+        b += prose(None, h, paras, theme="cream" if key in C.RESULTS else "linen", sub=sub)
     if s.get("options"):
         b += feature_list("Options", s["options_h2"], [s["options_intro"]], s["options"], theme="linen", sub=s["options_sub"], note=s["options_note"], cols=2)
     b += split(s["approach_eyebrow"], s["approach_h2"], s["approach"], None, s["approach_image"][0], s["approach_image"][1], reverse=True, theme="cream")
@@ -898,11 +939,12 @@ def page_skincare():
     <div class="products">{prods}</div>
     <div class="cta-row">{shop_btn("Shop Skincare", "primary")}</div>
     <p class="note">Purchases are completed securely on Skin Clique. This website does not process orders.</p>''', "cream")
+    b += results_gallery(C.RESULTS["skincare"], h2="Real Skin. Real Results.", intro=["Prescription and medical-grade skincare results from Isabelle's patients."], theme="linen", cta=book_btn("Book a Skincare Consultation"))
     b += split("Skincare Philosophy", "The Goal Isn't More Products. It's the Right Products.", [
         "Isabelle has a particular passion for medical-grade skincare and helping patients understand what their skin actually needs.",
         "Through personalized skincare consultations, medical-grade products, and prescription skincare options when appropriate, she helps patients create realistic routines based on their individual skin concerns and goals.",
         "Your everyday routine also plays an important role in protecting your skin and supporting your goals between professional treatments such as chemical peels. Isabelle can help you determine which cleansers, antioxidants, moisturizers, retinoids, pigment-focused products, and sun protection may make sense for your individual skin.",
-    ], [btn("Explore Chemical Peels", "chemical-peels", "text")], "skincare-philosophy", "Isabelle reviewing a skincare routine with a patient", theme="linen", reverse=True)
+    ], [btn("Explore Chemical Peels", "chemical-peels", "text")], "skincare-philosophy", "Isabelle reviewing a skincare routine with a patient", theme="cream", reverse=True)
     placeholder_svg("skincare-philosophy", "Isabelle reviewing products with a patient", tone="sage")
     b += section(f'''
     <div class="sec-head">{eyebrow("Education")}<h2>Skincare Reading From The Isabelle Edit</h2></div>

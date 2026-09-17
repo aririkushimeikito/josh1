@@ -902,3 +902,48 @@ FAQ_EXTRA = {
         ("Does hair loss treatment work for women too?", "Yes—hair thinning affects people of all genders, and treatment plans are tailored to the individual."),
     ],
 }
+
+# ---------------------------------------------------------------- supplied photography
+# Placeholder name -> (file in images/, focal point, alt text). One photo may serve several placeholders.
+PHOTOS = {
+    "home-concierge":   ("concierge-kit.jpg", "50% 60%", "Isabelle's concierge kit packed with skincare, ready for a home visit"),
+    "services-hero":    ("concierge-kit.jpg", "50% 45%", "Concierge treatment kit with medical-grade skincare, packed for an appointment"),
+    "skincare-hero":    ("concierge-kit.jpg", "50% 25%", "Medical-grade skincare products packed in Isabelle's concierge bag"),
+    "about-aesthetics": ("natural-skin-profile.jpg", "50% 30%", "Profile of a patient with natural, healthy-looking skin"),
+    "peels-hero":       ("natural-skin-profile.jpg", "50% 30%", "Close profile showing smooth, even-looking skin"),
+    "about-personal":   ("about-personal.jpg", "50% 30%", "Isabelle at home during the holidays, holding a baby in front of the Christmas tree"),
+}
+
+# Before-and-after results shown in "Real Results" galleries. Captions describe the area only; no outcome claims.
+RESULTS = {
+    "tox": [
+        ("results-tox-forehead-lines.jpg", "Forehead lines — before and after Tox"),
+        ("results-tox-frown-lines.jpg", "Frown lines between the brows — before and after Tox"),
+        ("results-tox-lip-flip-1.jpg", "Lip flip — before and after Tox"),
+        ("results-tox-lip-flip-2.jpg", "Lip flip — before and after Tox"),
+    ],
+    "chemical-peels": [
+        ("results-peel-forehead.jpg", "Forehead — before and after a second chemical peel"),
+        ("results-peel-cheek.jpg", "Cheek tone and texture — before and after treatment"),
+        ("results-peel-texture.jpg", "Cheek texture — before and after treatment"),
+    ],
+    "skincare": [
+        ("results-skin-prescription.jpg", "Skincare and topical prescription — before and after"),
+        ("results-skin-acne-cheek.jpg", "Acne and post-acne marks — before and after"),
+        ("results-skin-redness.jpg", "Redness and breakouts — before and after"),
+        ("results-skin-tone-1.jpg", "Skin tone and clarity — before and after"),
+        ("results-skin-tone-2.jpg", "Skin tone and clarity — before and after"),
+        ("results-skin-tone-3.jpg", "Skin tone and clarity — before and after"),
+        ("results-skin-tone-4.jpg", "Skin tone and clarity — before and after"),
+        ("results-skin-12-weeks.jpg", "Fine lines around the eyes — baseline and after 12 weeks of twice-daily use"),
+        ("results-skin-under-eye.jpg", "Under-eye area — before and after"),
+    ],
+}
+# Four results highlighted on the homepage, each linking to its service page
+RESULTS_HOME = [
+    ("results-tox-lip-flip-1.jpg", "Lip flip", "Tox", "tox"),
+    ("results-peel-forehead.jpg", "Chemical peel", "Chemical Peels", "chemical-peels"),
+    ("results-skin-prescription.jpg", "Prescription skincare", "Skincare", "skincare"),
+    ("results-skin-tone-3.jpg", "Skin tone + clarity", "Skincare", "skincare"),
+]
+RESULTS_NOTE = "Individual results vary. Photos are shared to illustrate the areas Isabelle treats, not to promise a specific outcome."

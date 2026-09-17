@@ -203,6 +203,21 @@ mark.ph{background:rgba(193,123,94,.14);color:var(--terracotta-deep);font-family
 .concern-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0 clamp(2rem,5vw,4.5rem);border-top:1px solid var(--rule)}
 @media (max-width:640px){.concern-grid{grid-template-columns:1fr}}
 
+/* before/after results — native Squarespace Gallery Block (grid) equivalent */
+.results{columns:3;column-gap:clamp(1rem,2.5vw,2rem)}
+.results--2{columns:2}
+.result{margin:0 0 clamp(1rem,2.5vw,2rem);display:block;text-decoration:none;color:inherit;break-inside:avoid}
+.result img{width:100%;height:auto;display:block;border-radius:var(--radius);background:var(--linen-deep)}
+.results--4{columns:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(1rem,2.5vw,2rem);align-items:start}
+.results--4 .result{margin:0}
+.results--4 img{aspect-ratio:3/4;object-fit:cover;object-position:50% 50%}
+.result figcaption,.result__cap{display:block;margin-top:.6rem;font-size:.85rem;color:var(--ink-soft);line-height:1.4}
+.result__cap strong{font-weight:600;color:var(--brown);margin-right:.35rem}
+.result--link:hover img{opacity:.92}
+.result--link:hover .result__cap strong{color:var(--terracotta-deep)}
+@media (max-width:1024px){.results{columns:2}.results--4{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.results{columns:1}.results--4{grid-template-columns:1fr}.results--4 img{aspect-ratio:4/5}}
+
 /* testimonials — text blocks in Fluid Engine */
 .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,3vw,3rem)}
 .quote{border-top:2px solid var(--terracotta);padding-top:1.25rem}
@@ -257,7 +272,7 @@ mark.ph{background:rgba(193,123,94,.14);color:var(--terracotta-deep);font-family
 .foot__area{color:var(--ink-soft);font-size:.9rem;max-width:34ch}
 .foot__col h2{font-family:var(--sans);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--sage-deep);margin-bottom:1rem}
 .foot__col ul{list-style:none;margin:0;padding:0;display:grid;gap:.45rem}
-.foot__col a{text-decoration:none;color:var(--brown);display:inline-block;padding:.2rem 0}
+.foot__col a{text-decoration:none;color:var(--brown);display:inline-block;padding:.2rem 0;overflow-wrap:anywhere}
 .foot__col a:hover{color:var(--terracotta-deep)}
 .foot__note{font-size:.8rem;color:var(--ink-muted)}
 .foot__legal{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--rule);font-size:.82rem;color:var(--ink-muted)}
