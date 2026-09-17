@@ -1,7 +1,7 @@
 # Isabelle Joseph, DNP, NP-BC — Squarespace 7.1 Build Guide
 
 **Platform:** Squarespace 7.1 · Fluid Engine · 100% native blocks · no custom code
-**Live preview of this design:** `site/` in this repo (deploy to Netlify) — every section below exists in the preview so the Squarespace editor can match it 1:1.
+**Live preview of this design:** https://aririkushimeikito.github.io/josh1/ (static pages at this repo's root) — every section below exists in the preview so the Squarespace editor can match it 1:1.
 **Sources used:** Brand Guide (colors + type), Website Sitemap + Team Guide, Homepage / About / Services Hub / Tox / Hyperhidrosis / Chemical Peels / GLP-1 / HRT / Hair Loss Content Blueprints, previous-site `sitemap.xml`.
 
 Anything shown as `[IN BRACKETS]` is content that still needs to be supplied (see Section G). No medical facts, credentials, reviews, or locations were invented; all copy is transcribed from the blueprints.
@@ -306,7 +306,7 @@ Squarespace: enter SEO title/description per page under Page Settings → SEO. S
 
 ## G. Content Requirements (still to be supplied)
 
-**Images (42 placeholders, named in `site/images/`):**
+**Images (42 placeholders, named in `images/`):**
 - Home: hero portrait; seated editorial portrait; concierge doorway/at-home shot; skincare still life; local landscape (South Easton); 3 article covers.
 - About: full-length portrait; natural-skin detail; wellness lifestyle; skincare routine; home-visit shot; candid personal (beach/travel).
 - Services hub: hero with treatment kit; concierge appointment.

@@ -2,7 +2,7 @@
 # The static preview in ./site is the publish directory. No build step is required.
 
 [build]
-  publish = "site"
+  publish = "."
   command = ""
 
 # Preserve SEO equity from the previous site's URLs (see original sitemap.xml)

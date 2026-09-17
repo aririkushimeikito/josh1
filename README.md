@@ -5,26 +5,27 @@ static high-fidelity preview of that design.
 
 | What | Where |
 |---|---|
+| **Live site (GitHub Pages)** | https://aririkushimeikito.github.io/josh1/ |
 | Squarespace build guide (architecture, design system, page specs, build map, responsive strategy, SEO map, content requirements) | [`SQUARESPACE-BUILD-GUIDE.md`](SQUARESPACE-BUILD-GUIDE.md) |
-| Static preview site (deployable as-is to Netlify) | [`site/`](site/) |
+| Static site (served by GitHub Pages from the repo root; also deployable to Netlify) | `index.html`, `about/`, `tox/`, … `images/`, `assets/` |
 | Site generator + all page copy | [`tools/build_site.py`](tools/build_site.py), [`tools/content.py`](tools/content.py) |
 | Netlify config + 301 redirects from the old site URLs | [`netlify.toml`](netlify.toml) |
 
 ## Preview site
 
-`site/` is plain HTML + one CSS file + SVG placeholder images. No JavaScript, no frameworks.
+The site is plain HTML + one CSS file + SVG placeholder images, generated into the repo root. No JavaScript, no frameworks.
 Every section is a 1:1 stand-in for a native Squarespace Fluid Engine section so the
 design can be rebuilt inside Squarespace exactly as previewed.
 
 ```bash
-python3 tools/build_site.py          # regenerates ./site from tools/content.py
-python3 -m http.server --directory site
+python3 tools/build_site.py          # regenerates the site pages from tools/content.py
+python3 -m http.server
 ```
 
 ## Replacing placeholder images
 
-Every placeholder is an SVG in `site/images/` whose caption says what photo belongs
-there. Drop a JPG/PNG with the same name into `site/images/` and update the `.svg`
+Every placeholder is an SVG in `images/` whose caption says what photo belongs
+there. Drop a JPG/PNG with the same name into `images/` and update the `.svg`
 reference in the page (or in `tools/build_site.py` and rebuild).
 
 ## External systems

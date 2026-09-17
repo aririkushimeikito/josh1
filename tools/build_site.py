@@ -2,7 +2,7 @@
 """
 Static site generator for the IsabelleJosephDNP.com design preview.
 
-    python3 tools/build_site.py                 -> writes ./site  (clean URLs, for Netlify)
+    python3 tools/build_site.py                 -> writes the site into the repo root (clean URLs; served by GitHub Pages / Netlify)
     python3 tools/build_site.py --flat OUTDIR   -> writes OUTDIR  (flat *.html, for hosted preview)
 
 The generated pages are a high-fidelity preview of the Squarespace 7.1 build
@@ -14,7 +14,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 import content as C
 
 FLAT = "--flat" in sys.argv
-OUT = sys.argv[sys.argv.index("--flat") + 1] if FLAT else os.path.join(os.path.dirname(__file__), "..", "site")
+OUT = sys.argv[sys.argv.index("--flat") + 1] if FLAT else os.path.join(os.path.dirname(__file__), "..")
 OUT = os.path.abspath(OUT)
 
 # ------------------------------------------------------------------ helpers
@@ -975,10 +975,24 @@ def out_path(slug):
         return os.path.join(OUT, "index.html" if slug == "" else f"{slug}.html")
     return os.path.join(OUT, "index.html" if slug == "" else os.path.join(slug, "index.html"))
 
+GENERATED = ["index.html", "404.html", "robots.txt", "sitemap.xml", ".nojekyll", "assets", "images"]
+
+def clean():
+    """Remove previously generated output only (never the whole repo root)."""
+    if FLAT:
+        if os.path.isdir(OUT):
+            shutil.rmtree(OUT)
+        os.makedirs(OUT)
+        return
+    for name in GENERATED + list(C.PAGES[k]["slug"] for k in C.PAGES if C.PAGES[k]["slug"]) + C.SERVICE_ORDER:
+        path = os.path.join(OUT, name)
+        if os.path.isdir(path):
+            shutil.rmtree(path)
+        elif os.path.isfile(path):
+            os.remove(path)
+
 def main():
-    if os.path.isdir(OUT):
-        shutil.rmtree(OUT)
-    os.makedirs(OUT)
+    clean()
     builders = {
         "": (C.PAGES["index"], page_home),
         "about": (C.PAGES["about"], page_about),
