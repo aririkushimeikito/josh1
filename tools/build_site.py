@@ -72,12 +72,14 @@ def section(inner, theme="cream", cls="", id_=None):
 
 def hero(eyebrow_t, h1, paras, ctas, image, alt, tagline=None):
     tag = f'<p class="hero__tagline">{rich(tagline)}</p>' if tagline else ""
+    # One sentence per line: break the headline after each period.
+    h1_html = "<br>".join(f'<span class="h1-line">{rich(part)}</span>' for part in re.split(r"(?<=\.)\s+", h1.strip()))
     return f'''
 <section class="sec sec--cream hero">
   <div class="wrap hero__grid">
     <div class="hero__text">
       {eyebrow(eyebrow_t)}
-      <h1>{rich(h1)}</h1>
+      <h1>{h1_html}</h1>
       {tag}
       <div class="hero__copy">{p(paras)}</div>
       <div class="cta-row">{"".join(ctas)}</div>
@@ -352,7 +354,9 @@ mark.ph{background:rgba(193,123,94,.14);color:var(--terracotta-deep);font-family
 /* hero */
 .hero{padding-block:clamp(40px,6vw,88px) clamp(60px,8vw,110px)}
 .hero__grid{display:grid;grid-template-columns:7fr 5fr;gap:clamp(2rem,6vw,5.5rem);align-items:center}
-.hero__text h1{margin-bottom:.6em}
+.hero__text{container-type:inline-size}
+.hero__text h1{margin-bottom:.6em;font-size:clamp(1.8rem,9.8cqw,4.3rem)}
+.h1-line{white-space:nowrap}
 .hero__tagline{font-family:var(--serif);font-size:clamp(1.3rem,2vw,1.7rem);color:var(--terracotta-deep);margin:-.4rem 0 1.4rem;line-height:1.25}
 .hero__copy p{font-size:1.06rem;color:var(--ink-soft);max-width:56ch}
 .hero__media{margin-top:clamp(0px,4vw,56px)}
