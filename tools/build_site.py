@@ -203,6 +203,7 @@ def header():
     <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></label>
     <nav class="nav" aria-label="Primary">
       <ul class="nav__list">
+        <li><a href="{href("")}">Home</a></li>
         <li><a href="{href("about")}">About</a></li>
         <li class="dd"><a href="{href("services")}" aria-haspopup="true">Services <span class="dd__caret" aria-hidden="true">▾</span></a>
           <ul class="dd__menu"><li><a href="{href("services")}"><strong>All Services</strong></a></li>{svc}</ul>
