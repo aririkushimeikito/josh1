@@ -211,7 +211,7 @@ def header():
         <li><a href="{href("skincare")}">Skincare</a></li>
         <li><a href="{href("blog")}">The Isabelle Edit</a></li>
         <li><a href="{href("faqs")}" class="nav__faq">FAQs</a></li>
-        <li class="nav__book"><a class="btn btn--primary btn--sm" href="{href("book")}">Book</a></li>
+        <li class="nav__book"><a class="btn btn--primary" href="{href("book")}">Book</a></li>
       </ul>
     </nav>
   </div>
@@ -298,7 +298,6 @@ mark.ph{background:rgba(193,123,94,.14);color:var(--terracotta-deep);font-family
 .btn--light:hover{background:var(--cream);color:var(--brown)}
 .btn--text{background:none;border:none;padding:0;color:var(--terracotta-deep);border-bottom:1.5px solid currentColor;border-radius:0;letter-spacing:.1em}
 .btn--text:hover{color:var(--brown)}
-.btn--sm{padding:.7rem 1.2rem;font-size:.76rem}
 .cta-row{display:flex;flex-wrap:wrap;gap:.9rem 1.25rem;align-items:center;margin-top:1.75rem}
 
 /* header — native Squarespace header equivalent */

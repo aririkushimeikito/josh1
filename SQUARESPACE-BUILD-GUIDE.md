@@ -122,7 +122,7 @@ Both fonts are in Squarespace's Google Fonts list. Mobile: H1 38–42px, H2 30px
 - Layout: **Option 1** (site title left, nav right), height 82px, fixed/sticky, Cream background at 94% (use the native "solid" style with slight transparency), 1px bottom border.
 - Site title: "Isabelle Joseph, DNP" (text logo) + optional tagline "Concierge Aesthetics • Wellness • Skincare" (add tagline in Site Title settings; hide on mobile).
 - Nav items: Home · About · Services ▾ · Skincare · The Isabelle Edit · (FAQs in footer only).
-- Header button: **Book** → Skin Clique booking URL, Primary style, small.
+- Header button: **Book** → Skin Clique booking URL, Primary style at full size (Terracotta fill, white uppercase text, 16px × 28px padding, 2px radius).
 - Mobile menu: native overlay, DM Serif Display 24px items, Cream background.
 
 ### Footer (Design → Footer, one Fluid Engine section, Warm Linen)
