@@ -34,12 +34,11 @@
 .ij-nav>ul>li>a,.ij-nav>ul>li>.ij-toggle{text-decoration:none;font-size:.8rem;font-weight:500;color:var(--brown);letter-spacing:.12em;text-transform:uppercase;padding:.5rem 0;display:inline-block}
 .ij-nav>ul>li>a:hover,.ij-nav>ul>li>.ij-toggle:hover{color:var(--terracotta-deep)}
 .ij-toggle{cursor:pointer;user-select:none}
-.ij-caret{font-size:1.05em;margin-left:.25em;color:var(--ink-muted);display:inline-block;transition:transform .2s}
+.ij-caret{font-size:1.4em;margin-left:.3em;color:var(--ink-muted);display:inline-block;line-height:1;vertical-align:-.05em}
 .ij-dd{position:relative}
-.ij-cb{position:absolute;width:1px;height:1px;opacity:0;margin:0;pointer-events:none}
 .ij-menu{list-style:none;margin:0;padding:.75rem 0;position:absolute;top:100%;left:-1rem;min-width:270px;background:var(--cream);border:1px solid var(--rule);box-shadow:0 18px 40px -20px rgba(44,35,24,.35);display:block;opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .18s,transform .18s,visibility .18s}
 .ij-menu li{margin:0}
-.ij-dd:hover .ij-menu,.ij-dd:focus-within .ij-menu{opacity:1;visibility:visible;transform:none}
+.ij-dd:hover .ij-menu,.ij-dd:focus-within .ij-menu,.ij-toggle:focus + .ij-menu{opacity:1;visibility:visible;transform:none}
 .ij-menu a{display:block;padding:.5rem 1.25rem;text-decoration:none;font-size:.9rem;color:var(--brown)}
 .ij-menu a:hover{background:var(--linen);color:var(--terracotta-deep)}
 .ij-group{padding:.75rem 1.25rem .25rem;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--sage-deep);font-weight:600}
@@ -55,10 +54,8 @@
   .ij-toggle-cb:checked ~ .ij-burger span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
   .ij-nav>ul{flex-direction:column;align-items:stretch;gap:0}
   .ij-nav>ul>li>a,.ij-nav>ul>li>.ij-toggle{font-size:.95rem;padding:1rem 0;border-bottom:1px solid var(--rule);display:block}
-  .ij-caret{display:inline-block}
-  .ij-menu{position:static;opacity:1;visibility:visible;transform:none;border:0;box-shadow:none;background:transparent;padding:0;min-width:0;columns:2;column-gap:1rem;display:none}
-  .ij-cb:checked ~ .ij-menu{display:block;padding:0 0 .75rem}
-  .ij-cb:checked ~ .ij-toggle .ij-caret{transform:rotate(180deg)}
+  .ij-caret{display:none}
+  .ij-menu{position:static;opacity:1;visibility:visible;transform:none;border:0;box-shadow:none;background:transparent;padding:0 0 .75rem;min-width:0;columns:2;column-gap:1rem}
   .ij-group{break-after:avoid;padding-left:0}
   .ij-menu a{padding:.35rem 0;break-inside:avoid}
 }
@@ -66,7 +63,7 @@
 
 <header class="ij-header">
   <div class="ij-row">
-    <a class="ij-brand" href="/"><b>Isabelle Joseph, DNP</b><small>Concierge Aesthetics • Wellness • Skincare</small></a>
+    <a class="ij-brand" href="/"><b>Isabelle Joseph, DNP</b></a>
     <input type="checkbox" id="ij-nav-toggle" class="ij-toggle-cb" aria-label="Open menu">
     <label for="ij-nav-toggle" class="ij-burger" aria-hidden="true"><span></span><span></span><span></span></label>
     <nav class="ij-nav" aria-label="Primary">
@@ -74,8 +71,7 @@
         <li><a href="/">Home</a></li>
         <li><a href="/about">About</a></li>
         <li class="ij-dd">
-          <input type="checkbox" id="ij-services" class="ij-cb" aria-label="Toggle Services menu">
-          <label class="ij-toggle" for="ij-services" aria-haspopup="true">Services <span class="ij-caret" aria-hidden="true">▾</span></label>
+          <span class="ij-toggle" role="button" tabindex="0" aria-haspopup="true">Services <span class="ij-caret" aria-hidden="true">▾</span></span>
           <ul class="ij-menu">
             <li class="ij-group" aria-hidden="true">Aesthetics</li>
             <li><a href="/tox">Tox</a></li>
