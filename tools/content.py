@@ -8,9 +8,12 @@ Anything in [SQUARE BRACKETS] is a clearly-marked placeholder that still
 needs to be supplied. Nothing medical or factual has been invented.
 """
 
-BOOK_URL = "https://book.skinclique.com/webstoreNew/services/97d1c710-b934-4863-a258-42d8dce92b9c"
-SHOP_URL = "https://shop.skinclique.com/?provider=97d1c710-b934-4863-a258-42d8dce92b9c"
-SITE_URL = "https://isabellejosephdnp.com"
+import os as _os
+BOOK_URL = "https://book.skinclique.com/webstoreNew/services/97d1c710-b934-4863-a258-42d8dce92b9c?__hstc=255926793.8e41064eda1f1691b0f7dc280f427121.1786386997002.1789594327805.1789686452082.5&__hssc=255926793.1.1789686452082&__hsfp=3786a8b35607f8894f729af552b18b01&_gl=1*185gwm3*_gcl_au*MTk2MDUwNTc0Ni4xNzg2Mzg2OTk1Li0uLS4xNzg3NzkwMTEzLjUzNTE2MDE4OC4xNzg5Njg2NDYwLjE3ODk2ODY0NTk"
+SHOP_URL = "https://shop.skinclique.com/?provider=97d1c710-b934-4863-a258-42d8dce92b9c&__hstc=255926793.8e41064eda1f1691b0f7dc280f427121.1786386997002.1789594327805.1789686452082.5&__hssc=255926793.1.1789686452082&__hsfp=3786a8b35607f8894f729af552b18b01&_gl=1*hfey8a*_gcl_au*MTk2MDUwNTc0Ni4xNzg2Mzg2OTk1Li0uLS4xNzg3NzkwMTEzLjE5NDM1MjIyNTkuMTc4ODk1MTgwMS4xNzg4OTUxODAx"
+# Canonical/OG/sitemap base. Internal nav links are relative and domain-independent;
+# set SITE_URL env var when the domain changes (custom or temporary) so metadata matches.
+SITE_URL = _os.environ.get("SITE_URL", "https://isabellejosephdnp.com").rstrip("/")
 BRAND = "Isabelle Joseph, DNP"
 BRAND_FULL = "Isabelle Joseph, DNP, NP-BC"
 SERVICE_AREA = "South Easton, Norwell, Randolph, Somerset, Stoughton, Westwood + surrounding Massachusetts communities"
