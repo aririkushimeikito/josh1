@@ -250,7 +250,8 @@ def header():
         <li><a href="{href("")}">Home</a></li>
         <li><a href="{href("about")}">About</a></li>
         <li class="dd">
-          <span class="dd__toggle" role="button" tabindex="0" aria-haspopup="true">Services <span class="dd__caret" aria-hidden="true">▾</span></span>
+          <input type="checkbox" id="svc-toggle" class="dd__cb" aria-label="Toggle Services menu">
+          <label class="dd__toggle" for="svc-toggle" aria-haspopup="true">Services <span class="dd__caret" aria-hidden="true">▾</span></label>
           <ul class="dd__menu">{svc}</ul>
         </li>
         <li><a href="{href("faqs")}">FAQs</a></li>
@@ -359,9 +360,10 @@ mark.ph{background:rgba(193,123,94,.14);color:var(--terracotta-deep);font-family
 .dd__toggle{cursor:pointer;user-select:none}
 .nav__list>li>a:not(.btn):hover,.nav__list>li>.dd__toggle:hover{color:var(--terracotta-deep)}
 .dd{position:relative}
-.dd__caret{font-size:1.05em;margin-left:.25em;color:var(--ink-muted)}
+.dd__cb{position:absolute;width:1px;height:1px;opacity:0;margin:0;pointer-events:none}
+.dd__caret{font-size:1.05em;margin-left:.25em;color:var(--ink-muted);display:inline-block;transition:transform .2s}
 .dd__menu{list-style:none;margin:0;padding:.75rem 0;position:absolute;top:100%;left:-1rem;min-width:270px;background:var(--cream);border:1px solid var(--rule);box-shadow:0 18px 40px -20px rgba(44,35,24,.35);opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .18s,transform .18s,visibility .18s}
-.dd:hover .dd__menu,.dd:focus-within .dd__menu,.dd__toggle:focus + .dd__menu{opacity:1;visibility:visible;transform:none}
+.dd:hover .dd__menu,.dd:focus-within .dd__menu{opacity:1;visibility:visible;transform:none}
 .dd__menu a{display:block;padding:.5rem 1.25rem;text-decoration:none;font-size:.9rem;color:var(--brown)}
 .dd__menu a:hover{background:var(--linen);color:var(--terracotta-deep)}
 .dd__group{padding:.75rem 1.25rem .25rem;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--sage-deep);font-weight:600}
@@ -377,8 +379,10 @@ mark.ph{background:rgba(193,123,94,.14);color:var(--terracotta-deep);font-family
   .nav-toggle:checked ~ .nav-burger span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
   .nav__list{flex-direction:column;align-items:stretch;gap:0}
   .nav__list>li>a:not(.btn),.nav__list>li>.dd__toggle{font-size:.95rem;padding:1rem 0;border-bottom:1px solid var(--rule);display:block}
-  .dd__caret{display:none}
-  .dd__menu{position:static;opacity:1;visibility:visible;transform:none;border:0;box-shadow:none;background:transparent;padding:0 0 .75rem;min-width:0;columns:2;column-gap:1rem}
+  .dd__caret{display:inline-block}
+  .dd__menu{position:static;opacity:1;visibility:visible;transform:none;border:0;box-shadow:none;background:transparent;padding:0;min-width:0;columns:2;column-gap:1rem;display:none}
+  .dd__cb:checked ~ .dd__menu{display:block;padding:0 0 .75rem}
+  .dd__cb:checked ~ .dd__toggle .dd__caret{transform:rotate(180deg)}
   .dd__group{break-after:avoid;padding-left:0}
   .dd__menu a{padding:.35rem 0;break-inside:avoid}
 }
