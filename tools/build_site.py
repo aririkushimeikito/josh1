@@ -228,17 +228,19 @@ def service_groups(theme="cream", eyebrow_t="Explore Services", h2="Care Designe
 
 # ------------------------------------------------------------------ chrome
 def header():
-    # Dropdown groups mirror the primary-navigation design. Group labels
-    # (AESTHETICS / WELLNESS / SKINCARE) and "Services" are non-linking — no page exists.
+    # Three separate dropdowns, one per service category. The category names
+    # (Aesthetics / Wellness / Skincare) are non-linking toggles — no page exists.
     dd_groups = [
         ("Aesthetics", [("Tox", "tox"), ("Hyperhidrosis", "hyperhidrosis"), ("Chemical Peels", "chemical-peels")]),
         ("Wellness", [("GLP-1 Weight Management", "weight-loss"), ("Hormone Replacement Therapy", "hormone-replacement-therapy"), ("Hair Loss", "hair-loss")]),
         ("Skincare", [("Skincare Consultation", "skincare-consultations"), ("Skincare", "skincare")]),
     ]
-    svc = ""
+    dds = ""
     for gname, items in dd_groups:
-        svc += f'<li class="dd__group" aria-hidden="true">{esc(gname)}</li>'
-        svc += "".join(f'<li><a href="{href(s)}">{esc(n)}</a></li>' for n, s in items)
+        links = "".join(f'<li><a href="{href(s)}">{esc(n)}</a></li>' for n, s in items)
+        dds += (f'<li class="dd">'
+                f'<span class="dd__toggle" role="button" tabindex="0" aria-haspopup="true">{esc(gname)} <span class="dd__caret" aria-hidden="true">▾</span></span>'
+                f'<ul class="dd__menu">{links}</ul></li>')
     return f'''
 <header class="site-header">
   <div class="wrap site-header__row">
@@ -249,10 +251,7 @@ def header():
       <ul class="nav__list">
         <li><a href="{href("")}">Home</a></li>
         <li><a href="{href("about")}">About</a></li>
-        <li class="dd">
-          <span class="dd__toggle" role="button" tabindex="0" aria-haspopup="true">Services <span class="dd__caret" aria-hidden="true">▾</span></span>
-          <ul class="dd__menu">{svc}</ul>
-        </li>
+        {dds}
         <li><a href="{href("faqs")}">FAQs</a></li>
         <li><a href="{href("blog")}">The Isabelle Edit</a></li>
         <li><a href="{esc(C.SHOP_URL)}" target="_blank" rel="noopener">Shop</a></li>
@@ -368,7 +367,7 @@ mark.ph{background:rgba(193,123,94,.14);color:var(--terracotta-deep);font-family
 .nav-toggle{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
 .nav-burger{display:none;width:44px;height:44px;flex-direction:column;justify-content:center;gap:6px;cursor:pointer;padding:8px;margin-right:-8px}
 .nav-burger span{display:block;height:1.5px;background:var(--brown);transition:transform .2s,opacity .2s}
-@media (max-width:1100px){
+@media (max-width:1200px){
   .nav-burger{display:flex}
   .nav{position:absolute;left:0;right:0;top:100%;background:var(--cream);border-bottom:1px solid var(--rule);display:none;padding:1rem var(--gutter) 2rem;max-height:calc(100vh - 82px);overflow:auto}
   .nav-toggle:checked ~ .nav{display:block}
@@ -378,7 +377,8 @@ mark.ph{background:rgba(193,123,94,.14);color:var(--terracotta-deep);font-family
   .nav__list{flex-direction:column;align-items:stretch;gap:0}
   .nav__list>li>a:not(.btn),.nav__list>li>.dd__toggle{font-size:.95rem;padding:1rem 0;border-bottom:1px solid var(--rule);display:block}
   .dd__caret{display:none}
-  .dd__menu{position:static;opacity:1;visibility:visible;transform:none;border:0;box-shadow:none;background:transparent;padding:0 0 .75rem;min-width:0;columns:2;column-gap:1rem}
+  .dd__menu{position:static;opacity:1;visibility:visible;transform:none;border:0;box-shadow:none;background:transparent;padding:0 0 .75rem;min-width:0}
+  .dd__menu a{padding:.5rem 0 .5rem 1rem;font-size:.9rem}
   .dd__group{break-after:avoid;padding-left:0}
   .dd__menu a{padding:.35rem 0;break-inside:avoid}
 }
